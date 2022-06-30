@@ -1,4 +1,4 @@
-module.exports = {
+export class map {
     /**
      * @param {string} str
      * @param {number} startCode
@@ -7,12 +7,17 @@ module.exports = {
      * @return {Array}
      * @private
      */
-    rangeMap(str, startCode, endCode, cb) {
+    static rangeMap(
+        str: string,
+        startCode: number,
+        endCode: number,
+        cb: (b: boolean, s: string, c: number) => string
+    ): Array<string> {
         return str.split("").map((s) => {
             const c = s.charCodeAt(0);
-            return cb((c > startCode && c < endCode ), s, c);
+            return cb(c > startCode && c < endCode, s, c);
         });
-    },
+    }
 
     /**
      * @param {string} str
@@ -21,9 +26,13 @@ module.exports = {
      * @return {String}
      * @private
      */
-    regexpMap(str, regexp, cb) {
+    static regexpMap(
+        str: string,
+        regexp: RegExp,
+        cb: (s: string) => string
+    ): string {
         return str.replace(regexp, (s) => {
             return cb(s);
         });
-    },
-};
+    }
+}
