@@ -224,12 +224,12 @@ describe("moji.cores", () => {
         );
     });
 
-    // it("addMojisyu", () => {
-    //     const o = {
-    //         ADD: { start: 0xff01, end: 0xff5e },
-    //     };
-    //     moji.addMojisyu(o);
+    it("addMojisyu", () => {
+        const o = {
+            ADD: { start: 0xff01, end: 0xff5e },
+        };
+        moji.addMojisyu(o);
 
-    //     assert.deepEqual(moji()._mojisyu.ADD.name, "ADD");
-    // });
+        assert.deepEqual(moji("")._mojisyu.ADD.name, "ADD");
+    });
 });

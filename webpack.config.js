@@ -1,66 +1,67 @@
-import { resolve } from "path";
+const path = require("path");
 
-export default [
-  {
-    entry: "./src/index.js",
-    output: {
-      filename: "./dist/moji.js",
-      library: "moji",
-      libraryTarget: "umd",
-      path: resolve(__dirname),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-          },
+module.exports = [
+    {
+        entry: "./src/index.ts",
+        output: {
+            filename: "./dist/moji.js",
+            library: "moji",
+            libraryTarget: "umd",
+            path: path.resolve(__dirname),
         },
-      ],
-    },
-  },
-  {
-    entry: "./src/index.js",
-    output: {
-      filename: "./docs/moji.js",
-      library: "moji",
-      libraryTarget: "umd",
-      path: resolve(__dirname),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-          },
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    exclude: /node_modules/,
+                    loader: "ts-loader",
+                },
+            ],
         },
-      ],
-    },
-  },
-  {
-    entry: [
-      "./test/moji.core.test.js",
-      "./test/moji.str.test.js",
-      "./test/mojisyu.test.js",
-    ],
-    output: {
-      filename: "./docs/moji.test.js",
-      path: resolve(__dirname),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-          },
+        resolve: {
+            extensions: [".ts"],
         },
-      ],
     },
-  },
+    {
+        entry: "./src/index.ts",
+        output: {
+            filename: "./docs/moji.js",
+            library: "moji",
+            libraryTarget: "umd",
+            path: path.resolve(__dirname),
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    exclude: /node_modules/,
+                    loader: "ts-loader",
+                },
+            ],
+        },
+        resolve: {
+            extensions: [".ts"],
+        },
+    },
+    /*
+    {
+        entry: ["./test/moji.core.spec.ts", "./test/moji.str.spec.ts"],
+        output: {
+            filename: "./docs/moji.spec.js",
+            path: path.resolve(__dirname),
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    exclude: /node_modules/,
+                    loader: "ts-loader",
+                },
+            ],
+        },
+        resolve: {
+            extensions: [".ts"],
+        },
+    },
+    */
 ];
