@@ -1,46 +1,27 @@
-export interface TypeMojisyuRange {
-    kind: "range";
-    start: number;
-    end: number;
-}
-export interface TypeMojisyuRegexpList {
-    kind: "regexpList";
-    regexp: RegExp;
-    list: string[];
-}
-
-export type TypeMojisyuPatternsTuple = [RegExp, { [name: string]: string }];
-
-export interface TypeMojisyuPatterns {
-    kind: "patterns";
-    patterns: Array<TypeMojisyuPatternsTuple>;
-}
-
 export const defaultMojisyu: {
-    [name: string]:
-        | TypeMojisyuRange
-        | TypeMojisyuRegexpList
-        | TypeMojisyuPatterns;
+    [name: string]: {
+        start?: number;
+        end?: number;
+        patterns?: [[RegExp, { [name: string]: string }]];
+        regexp?: RegExp;
+        list?: string[];
+    };
 } = {
     ZE: {
-        kind: "range",
         start: 0xff01,
         end: 0xff5e,
-    } as TypeMojisyuRange, // 全角英数
-    HE: { kind: "range", start: 0x0021, end: 0x007e } as TypeMojisyuRange, // 半角英数
-    HG: { kind: "range", start: 0x3041, end: 0x3096 } as TypeMojisyuRange, // ひらがな
-    KK: { kind: "range", start: 0x30a1, end: 0x30f6 } as TypeMojisyuRange, // カタカナ
+    }, // 全角英数
+    HE: { start: 0x0021, end: 0x007e }, // 半角英数
+    HG: { start: 0x3041, end: 0x3096 }, // ひらがな
+    KK: { start: 0x30a1, end: 0x30f6 }, // カタカナ
 
     HS: {
-        kind: "patterns",
         patterns: [[/(\s|\u00A0)/g, { ZS: "　" }]],
-    } as TypeMojisyuPatterns, // 半角スペース
+    }, // 半角スペース
     ZS: {
-        kind: "patterns",
         patterns: [[/(\u3000)/g, { HS: " " }]],
-    } as TypeMojisyuPatterns, //全角スペース
+    }, //全角スペース
     HK: {
-        kind: "regexpList",
         regexp: /([\uff66-\uff9c]\uff9e)|([\uff8a-\uff8e]\uff9f)|([\uff61-\uff9f])/g, // 半角カナ
         list: [
             "｡",
@@ -135,9 +116,8 @@ export const defaultMojisyu: {
             "ﾎﾟ",
             "ﾜﾞ",
         ],
-    } as TypeMojisyuRegexpList,
+    },
     ZK: {
-        kind: "regexpList",
         regexp: /([\u30a1-\u30f6])/g, //全角カナ (半角カナ変換用)
         list: [
             "。",
@@ -232,5 +212,5 @@ export const defaultMojisyu: {
             "ポ",
             "ヷ",
         ],
-    } as TypeMojisyuRegexpList,
+    },
 };

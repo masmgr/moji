@@ -1,18 +1,18 @@
-import { core } from "./core";
 import { Mojisyu } from "./mojisyu";
 
 /**
  * @type {Moji}
  */
 export class Moji {
-    private _str: string;
-    private _mojisyu: { [key: string]: Mojisyu };
+    #str: string;
+    _mojisyu: { [key: string]: Mojisyu };
+
     /**
      * @param {String} str
      * @param {Object} mojisyu
      */
     constructor(str: string, mojisyu: object) {
-        this._str = str;
+        this.#str = str;
         this._mojisyu = { ...mojisyu };
     }
 
@@ -30,25 +30,25 @@ export class Moji {
 
         const from = this._mojisyu[fromName];
         const to = this._mojisyu[toName];
-        this._str = core.convert(this._str, from, to);
+        this.#str = from.convert(this.#str, to);
         return this;
     }
 
     /**
-     * @param {string} filterMojisyuName フィルタする文字種名
+     * @param {string} mojisyuName フィルタする文字種名
      * @return {Moji}
      */
-    filter(filterMojisyuName: string): Moji {
-        this._str = core.filter(this._str, this._mojisyu[filterMojisyuName]);
+    filter(mojisyuName: string): Moji {
+        this.#str = this._mojisyu[mojisyuName].filter(this.#str);
         return this;
     }
 
     /**
-     * @param {string} rejectMojisyuName
+     * @param {string} mojisyuName
      * @return {Moji}
      */
-    reject(rejectMojisyuName: string): Moji {
-        this._str = core.reject(this._str, this._mojisyu[rejectMojisyuName]);
+    reject(mojisyuName: string): Moji {
+        this.#str = this._mojisyu[mojisyuName].reject(this.#str);
         return this;
     }
 
@@ -56,7 +56,7 @@ export class Moji {
      * @return {string}
      */
     toString(): string {
-        return this._str;
+        return this.#str;
     }
 
     /**
@@ -65,9 +65,9 @@ export class Moji {
      */
     toCharCode(separateString?: string): string {
         const ss = separateString ?? "|";
-        return this._str
+        return this.#str
             .split("")
-            .map((s) => {
+            .map((s: string) => {
                 return s.charCodeAt(0);
             })
             .join(ss);
@@ -80,7 +80,7 @@ export class Moji {
      * @return {Moji}
      */
     string(method: string, ...args: any[]): Moji {
-        this._str = String.prototype[method].call(this._str, ...args);
+        this.#str = String.prototype[method].call(this.#str, ...args);
         return this;
     }
 }
