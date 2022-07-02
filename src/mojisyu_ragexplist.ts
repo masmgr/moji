@@ -15,21 +15,12 @@ export class MojisyuRegexpList implements Mojisyu {
     regexp: RegExp;
     list: string[];
 
-    /**
-     * @param {String} name
-     * @param {TypeMojisyuRegexpList} mObj
-     */
     constructor(name: string, regexp: RegExp, list: string[]) {
         this.name = name;
         this.regexp = regexp;
         this.list = list;
     }
 
-    /**
-     * @param {string} str
-     * @param {Mojisyu} to
-     * @return {string}
-     */
     convert(str: string, to: MojisyuRegexpList): string {
         return regexpMap(str, this.regexp, (s) => {
             const i = this.list.indexOf(s);
@@ -38,10 +29,6 @@ export class MojisyuRegexpList implements Mojisyu {
         });
     }
 
-    /**
-     * @param {string} str
-     * @return {string}
-     */
     filter(str: string): string {
         const r: string[] = [];
         regexpMap(str, this.regexp, (s: string) => {
@@ -54,10 +41,6 @@ export class MojisyuRegexpList implements Mojisyu {
         return r.join("");
     }
 
-    /**
-     * @param {string} str
-     * @return {string}
-     */
     reject(str: string): string {
         regexpMap(str, this.regexp, (s) => {
             const i = this.list.indexOf(s);

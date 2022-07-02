@@ -1,11 +1,7 @@
+import { TypeMojisyu } from "./mojisyu";
+
 export const defaultMojisyu: {
-    [name: string]: {
-        start?: number;
-        end?: number;
-        patterns?: [[RegExp, { [name: string]: string }]];
-        regexp?: RegExp;
-        list?: string[];
-    };
+    [name: string]: TypeMojisyu
 } = {
     ZE: {
         start: 0xff01,

@@ -13,26 +13,16 @@ function rangeMap(
 }
 
 export class MojisyuRange implements Mojisyu {
-    //kind: "range" = "range";
     name: string;
     start: number;
     end: number;
 
-    /**
-     * @param {String} name
-     * @param {TypeMojisyuRange} mObj
-     */
     constructor(name: string, start: number, end: number) {
         this.name = name;
         this.start = start;
         this.end = end;
     }
 
-    /**
-     * @param {string} str
-     * @param {Mojisyu} to
-     * @return {string}
-     */
     convert(str: string, to: MojisyuRange): string {
         const d = to.start - this.start;
         return rangeMap(str, this.start, this.end, (match, s, c) => {
@@ -43,10 +33,6 @@ export class MojisyuRange implements Mojisyu {
         }).join("");
     }
 
-    /**
-     * @param {string} str
-     * @return {string}
-     */
     filter(str: string): string {
         return rangeMap(str, this.start, this.end, (match, str) => {
             if (!match) {
@@ -56,10 +42,6 @@ export class MojisyuRange implements Mojisyu {
         }).join("");
     }
 
-    /**
-     * @param {string} str
-     * @return {string}
-     */
     reject(str: string): string {
         return rangeMap(str, this.start, this.end, (match, str, code) => {
             if (!match) {
