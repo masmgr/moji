@@ -1,4 +1,4 @@
-import { Mojisyu } from "./mojisyu";
+import { Mojisyu, TypeMojisyuPatternsTuple } from "./mojisyu";
 
 function regexpMap(
     str: string,
@@ -10,27 +10,15 @@ function regexpMap(
     });
 }
 
-type TypeMojisyuPatternsTuple = [RegExp, { [name: string]: string }];
-
 export class MojisyuPatterns implements Mojisyu {
     name: string;
     patterns: Array<TypeMojisyuPatternsTuple>;
 
-    /**
-     * @param {String} name
-     * @param {TypeMojisyuPatterns} mObj
-     */
     constructor(name: string, patterns: Array<TypeMojisyuPatternsTuple>) {
         this.name = name;
         this.patterns = patterns;
     }
 
-    /**
-     * @param {string} str
-     * @param {Mojisyu} to
-     * @return {string}
-     * @private
-     */
     convert(str: string, to: MojisyuPatterns): string {
         return this.patterns
             .map((pattern: TypeMojisyuPatternsTuple) => {
@@ -41,11 +29,6 @@ export class MojisyuPatterns implements Mojisyu {
             .join("");
     }
 
-    /**
-     * @param {string} str
-     * @return {string}
-     * @private
-     */
     filter(str: string): string {
         const r = [];
         this.patterns.forEach((pattern) => {
@@ -57,11 +40,6 @@ export class MojisyuPatterns implements Mojisyu {
         return r.join("");
     }
 
-    /**
-     * @param {string} str
-     * @return {string}
-     * @private
-     */
     reject(str: string): string {
         this.patterns.forEach((pattern: TypeMojisyuPatternsTuple) => {
             regexpMap(str, pattern[0], (s) => {
