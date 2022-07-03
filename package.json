@@ -1,16 +1,17 @@
 {
-    "name": "moji",
-    "version": "1.2.0",
-    "description": "半角全角変換・特定文字抽出など日本語を便利に扱うJavaScriptライブラリ。",
+    "name": "@masmgr/moji",
+    "version": "0.0.1",
+    "description": "半角全角変換・特定文字抽出など日本語を便利に扱うJavaScriptライブラリ。Typescript対応",
     "main": "dist/moji.js",
     "scripts": {
         "test": "jest",
         "build": "webpack --mode development",
-        "build:w": "webpack --watch"
+        "build:w": "webpack --watch",
+        "prod": "webpack --mode production"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/niwaringo/moji"
+        "url": "https://github.com/masmgr/moji"
     },
     "keywords": [
         "半角",
@@ -19,12 +20,12 @@
         "半角カナ",
         "変換"
     ],
-    "author": "@niwaringo",
+    "author": "Masaki Ikeda <imasaki20@gmail.com> (http://github.com/masmgr)",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/niwaringo/mojic/issues"
+        "url": "https://github.com/masmgr/moji/issues"
     },
-    "homepage": "https://github.com/niwaringo/moji",
+    "homepage": "https://github.com/masmgr/moji",
     "devDependencies": {
         "@babel/core": "^7.18.6",
         "@babel/preset-env": "^7.18.6",
