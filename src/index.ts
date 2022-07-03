@@ -5,7 +5,7 @@ import { MojisyuRange } from "./mojisyu_range";
 import { MojisyuRegexpList } from "./mojisyu_ragexplist";
 import { MojisyuPatterns } from "./mojisyu_patterns";
 
-let mojisyu: { [name: string]: Mojisyu } = {};
+const mojisyu: { [name: string]: Mojisyu } = {};
 
 /**
  * @param {string} str
