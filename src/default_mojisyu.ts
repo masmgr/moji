@@ -1,7 +1,7 @@
 import { TypeMojisyu } from "./mojisyu";
 
 export const defaultMojisyu: {
-    [name: string]: TypeMojisyu
+    [name: string]: TypeMojisyu;
 } = {
     ZE: {
         start: 0xff01,
